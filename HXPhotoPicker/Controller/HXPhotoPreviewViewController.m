@@ -154,9 +154,12 @@ HX_PhotoEditViewControllerDelegate
 }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    if (!CGRectEqualToRect(self.view.frame, [UIScreen mainScreen].bounds)) {
-        self.view.frame = [UIScreen mainScreen].bounds;
-    }
+    /// smhjsw
+//    if (!CGRectEqualToRect(self.view.frame, [UIScreen mainScreen].bounds)) {
+//        self.view.frame = [UIScreen mainScreen].bounds;
+//    }
+    self.view.frame = self.view.bounds;
+
     if (self.orientationDidChange || self.firstChangeFrame) {
         [self changeSubviewFrame];
         self.orientationDidChange = NO;
@@ -967,7 +970,8 @@ HX_PhotoEditViewControllerDelegate
     if (scrollView != self.collectionView) {
         return;
     }
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    /// smhjsw
+    CGFloat width = self.view.bounds.size.width;
     CGFloat offsetx = self.collectionView.contentOffset.x;
     NSInteger currentIndex = (offsetx + (width + 20) * 0.5) / (width + 20);
     if (currentIndex > self.modelArray.count - 1) {
@@ -1057,7 +1061,8 @@ HX_PhotoEditViewControllerDelegate
     }
     if (self.exteriorPreviewStyle == HXPhotoViewPreViewShowStyleDark) {
         float difference = fabs(offsetx - self.currentModel.previewContentOffsetX);
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        /// smhjsw
+        CGFloat width = self.view.bounds.size.width;
         if (difference > width) {
             difference = width;
         }
@@ -1522,7 +1527,8 @@ HX_PhotoEditViewControllerDelegate
 }
 - (HXPhotoCustomNavigationBar *)navBar {
     if (!_navBar) {
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        /// smhjsw
+        CGFloat width = self.view.bounds.size.width;
         _navBar = [[HXPhotoCustomNavigationBar alloc] initWithFrame:CGRectMake(0, 0, width, hxNavigationBarHeight)];
         _navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [_navBar pushNavigationItem:self.navItem animated:NO];
@@ -1603,7 +1609,8 @@ HX_PhotoEditViewControllerDelegate
 }
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0,self.view.hx_w + 20, [UIScreen mainScreen].bounds.size.height) collectionViewLayout:self.flowLayout];
+        /// smhjsw
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0,self.view.hx_w + 20, self.view.bounds.size.height) collectionViewLayout:self.flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
