@@ -16,6 +16,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.default_subspec = 'Default'
   
+  s.dependency 'SDWebImage'
+
   s.subspec 'Default' do |de|
     de.source_files = "HXPhotoPicker/**/*.{h,m}"
     de.resources = "HXPhotoPicker/Resources/*.{bundle}"
